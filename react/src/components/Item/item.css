@@ -1,0 +1,83 @@
+.Item .todo {
+  height: 55px;
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+.Item .todo:hover {
+  background-color: #e8f7ff;
+}
+.Item .todo:hover .icon-icon_nav_clost_line {
+  display: block;
+}
+.Item .todo:hover .icon-edit {
+  display: block;
+}
+.Item .todo .toggle {
+  display: none;
+}
+.Item .todo .toggle:checked + .toggle-style::before {
+  display: block;
+  content: "\2714";
+  text-align: center;
+  font-size: 24px;
+  color: rgb(80, 214, 47);
+}
+.Item .todo .toggle-style {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.Item .todo .todo-content {
+  height: 100%;
+  padding: 0 15px;
+  cursor: pointer;
+  flex: 1;
+  font-size: 18px;
+  line-height: 55px;
+}
+.Item .todo .input-content {
+  height: 40px;
+  margin: 0 10px;
+  padding: 8px;
+  outline: none;
+  cursor: pointer;
+  flex: 1;
+  font-size: 18px;
+  line-height: 40px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px #9fd4fd;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+.Item .todo .completed {
+  color: #babcc7;
+  text-decoration: line-through;
+}
+.Item .todo .icon-edit,
+.icon-icon_nav_clost_line {
+  display: none;
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  line-height: 34px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.Item .todo .icon-edit {
+  color: #3491fa;
+}
+.Item .todo .icon-icon_nav_clost_line {
+  color: #f53f3f;
+  transition: 0.3s ease-in-out;
+}
+.Item .todo .icon-icon_nav_clost_line:hover {
+  transform: rotate(180deg);
+  font-weight: 600;
+}
