@@ -22,7 +22,6 @@
       clickMode="push"
       class="cash"
     >
-    <router-view/>
     </vue-particles>
   </div>
 </template>
