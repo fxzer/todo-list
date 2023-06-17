@@ -1,11 +1,12 @@
 <template>
   <div id="Todos">
     <ul class="todo-list">
-
+      <transition-group name="fade" @enter="addTodoTransition" @leave="deleteTodoTransition" >
       <Item v-for="item in todoList" :todo="item" :key="item.id"
         @deleteTodo="emit('deleteTodo', item.id)"
         @completeTodo="emit('completeTodo', item.id)"
         @editTodo="editTodo" />
+      </transition-group>
     </ul>
     <footer>
       <span class="account">{{ todoList.length }}项</span>
@@ -19,6 +20,7 @@
 </template>
 
 <script lang="ts"  setup>
+import { gsap } from 'gsap';
 import Item from './Item.vue';
 const todoList: TodoItem[] = inject('todoList')
 const currentMenu = ref('全部')
@@ -40,6 +42,27 @@ const clearCompleted = () => {
 const editTodo = (id,content) =>{
   emit('editTodo' ,id,content)
 }
+
+const addTodoTransition = (item) => {
+  gsap.from(item, { opacity: 0, y: -20, duration: 0.5 });
+};
+
+const deleteTodoTransition = (item) => {
+  gsap.fromTo(
+    item,
+    { opacity: 1, y: 0 },
+    {
+      opacity: 0,
+      y: -20,
+      duration: 0.5,
+      onComplete: () => {
+        // 触发删除事件，通知父组件删除该项目
+        emit('deleteTodo', item.id);
+      }
+    }
+  );
+};
+
 </script>
 <style scoped lang="scss">
 #Todos {
@@ -112,6 +135,14 @@ const editTodo = (id,content) =>{
   .clear {
     color: #F7BA1E;
   }
+}
 
+.fade-leave-active {
+  transition:  all .3s ease-in-out;
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(100%);
 }
 </style>
